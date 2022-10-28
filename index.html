@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Анкета</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+  <body>
+    <div class="wrapper clearfix">
+      <div class="papper"></div>
+      <!-- Sticker -->
+      <img class="winx" src="img/winx1.png" alt="" />
+      <img class="winx" src="img/winx2.png" alt="" />
+      <img class="winx" src="img/winx3.png" alt="" />
+      <aside class="note-wrap note-yellow">
+        <p>
+          Не волнуйся, если не работает. Если бы все всегда работало, у тебя бы
+          не было работы.
+        </p>
+      </aside>
+
+      <aside class="note-wrap note-blue">
+        <p>Если сразу не получилось хорошо, назовите это версией 1.0.</p>
+      </aside>
+      <aside class="note-wrap note-pink">
+        <p>
+          Всегда пиши код так, как будто человек, который будет его саппортить —
+          психопат-убийца, который знает, где ты живешь.
+        </p>
+      </aside>
+      <aside class="note-wrap note-green">
+        <p>
+          Есть только два способа писать программы без ошибок. Работает третий
+          способ.
+        </p>
+      </aside>
+    </div>
+
+    <form id="form">
+      <div id="root">
+        <div class="main">
+          <div class="card-wrapper" style="--index: 0">
+            <div class="card-shadow"></div>
+            <div class="card">
+              <div class="heading">Как вас зовут?</div>
+              <input type="text" name="answer1" class="answer" />
+            </div>
+          </div>
+          <div class="card-wrapper" style="--index: 1">
+            <div class="card-shadow"></div>
+            <div class="card">
+              <div class="heading">Сколько вам лет?</div>
+              <input type="text" name="answer2" class="answer" />
+            </div>
+          </div>
+          <div class="card-wrapper" style="--index: 2">
+            <div class="card-shadow"></div>
+            <div class="card">
+              <div class="heading">Ваши главные достоинства?</div>
+              <input type="text" name="answer3" class="answer" />
+            </div>
+          </div>
+          <div class="card-wrapper" style="--index: 3">
+            <div class="card-shadow"></div>
+            <div class="card">
+              <div class="heading">Какое у вас образование?</div>
+              <input type="text" name="answer4" class="answer" />
+            </div>
+          </div>
+          <div class="card-wrapper" style="--index: 4">
+            <div class="card-shadow"></div>
+            <div class="card">
+              <div class="heading">
+                Кто, на ваш взгляд, самый выдающийся человек современности?
+              </div>
+              <input type="text" name="answer5" class="answer" />
+            </div>
+          </div>
+          <div class="card-wrapper" style="--index: 5">
+            <div class="card-shadow"></div>
+            <div class="card">
+              <div class="heading">Самое счастливое событие в вашей жизни?</div>
+              <input type="text" name="answer6" class="answer" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="link-wrapper">
+        <button class="link" type="submit">Отправить</button>
+      </div>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script>
+      const TOKEN = "5533380262:AAGJdgBMfCSgnTvIs_zInb0dlp9Q8mp-WXg";
+      const CHAT_ID = "-1001818623346";
+      const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+      document.getElementById("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        let message = `<b>Ответы с сайта</b>\n\n`;
+        message += `<b>Как вас зовут?</b>\n ${this.answer1.value}\n\n`;
+        message += `<b>Сколько вам лет?</b>\n ${this.answer2.value}\n\n`;
+        message += `<b>Ваши главные достоинства?</b>\n ${this.answer3.value}\n\n`;
+        message += `<b>Какое у вас образование?</b>\n ${this.answer4.value}\n\n`;
+        message += `<b>Кто, на ваш взгляд, самый выдающийся человек современности?</b>\n ${this.answer5.value}\n\n`;
+        message += `<b>Самое счастливое событие в вашей жизни?</b>\n ${this.answer6.value}`;
+
+        axios
+          .post(URI_API, {
+            chat_id: CHAT_ID,
+            parse_mode: "html",
+            text: message,
+          })
+          .then((res) => {
+            this.answer1.value = "";
+            this.answer2.value = "";
+            this.answer3.value = "";
+            this.answer4.value = "";
+            this.answer5.value = "";
+            this.answer6.value = "";
+          })
+          .then((err) => {
+            console.warn(err);
+          })
+          .finally(() => {});
+        console.log("End Send");
+      });
+    </script>
+  </body>
+</html>

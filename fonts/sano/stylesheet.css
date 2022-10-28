@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'SA No Rules';
+    src: url('SANoRulesRegular.eot');
+    src: local('SA No Rules'), local('SANoRulesRegular'),
+        url('SANoRulesRegular.eot?#iefix') format('embedded-opentype'),
+        url('SANoRulesRegular.woff2') format('woff2'),
+        url('SANoRulesRegular.woff') format('woff'),
+        url('SANoRulesRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
